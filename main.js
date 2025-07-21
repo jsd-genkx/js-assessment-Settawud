@@ -29,6 +29,27 @@ class Field {
 		// Replace with your own code //
 		console.log(this.field); // Please REMOVE this line before you start your code!
 	}
+  
+  static generateField(height, width, percentage = 0.1) {
+    const field = new Array(height).fill(0).map(() => new Array(width));
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const prob = Math.random();
+        field[y][x] = prob > percentage ? fieldCharacter : hole;
+      }
+    }
+    const hatLocation = {
+      x: Math.floor(Math.random() * width),
+      y: Math.floor(Math.random() * height)
+    };
+    while (hatLocation.x === 0 && hatLocation.y === 0) {
+      hatLocation.x = Math.floor(Math.random() * width);
+      hatLocation.y = Math.floor(Math.random() * height);
+    }
+    field[hatLocation.y][hatLocation.x] = hat;
+    return field;
+  }
+
 
 	// Your Code //
 }
